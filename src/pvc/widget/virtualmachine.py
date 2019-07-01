@@ -864,17 +864,17 @@ class VirtualMachineConsoleWidget(object):
         )
 
         ticket = self.agent.si.content.sessionManager.AcquireCloneTicket()
+        url = 'vmrc://clone:{}@{}/?moid={}'.format(ticket,
+                                                   self.agent.host,
+                                                   self.obj._moId)
 
         try:
             if platform.system() == 'Darwin':
-                args=['open', 'vmrc://clone:{}@{}/?moid={}'.format(
-                                                                ticket,
-                                                                self.agent.host,
-                                                                self.obj._moId)]
+                program = 'open'
             else:
-                args=['vmplayer', '-H', self.agent.host, '-P', ticket, '-M', self.obj._moId]
+                program = 'vmrc'
             Popen(
-                args=args,
+                args=[program, url],
                 stdout=PIPE,
                 stderr=PIPE
             )

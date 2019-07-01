@@ -872,7 +872,7 @@ class VirtualMachineConsoleWidget(object):
                                                                 self.agent.host,
                                                                 self.obj._moId)]
             else:
-                args=['vmplayer', '-H', self.agent.host, '-P', ticket, '-M', self.obj._moId]
+                args=['vmrc', '-H', self.agent.host, '-P', ticket, '-M', self.obj._moId]
             Popen(
                 args=args,
                 stdout=PIPE,
